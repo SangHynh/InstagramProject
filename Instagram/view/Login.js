@@ -1,26 +1,52 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, Image, View, TextInput } from "react-native";
 
+import { StyleSheet, Text, Image, View, TextInput, TouchableOpacity } from "react-native";
+import { useState } from "react";
 import { Button } from "react-native-paper";
 
 export default function Login() {
+  const [passVisiable,setPassVisiable] = useState(false);
   return (
+    
+
+
     <View style={styles.container}>
       <View style={{ flex: 0.5 }}> </View>
       <View style={styles.logoView}>
         <Image source={require("../assets/instagram_logo.png")} style={styles.logo} />
       </View>
-      <View style={styles.inputView}>
-        <TextInput
-          placeholder="Phone number, user name or email"
-          placeholderTextColor={"gray"}
-          style={styles.textInput}
-        />
-        <TextInput
-          placeholder="Password"
-          placeholderTextColor={"gray"}
-          style={styles.textInput}
-        />
+      <View >
+        <View style={styles.inputView}> 
+          <TextInput
+            placeholder="Phone number, user name or email"
+            placeholderTextColor={"gray"}
+            style={styles.textInput}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            placeholder="Password"
+            placeholderTextColor={"gray"}
+            style={styles.textInput}
+            secureTextEntry={passVisiable? false: true}
+          />
+          <TouchableOpacity
+            onPress={() => {
+              setPassVisiable(!passVisiable)
+            }}
+            >
+              {passVisiable?
+              <Image source={require("../assets/invisiable.png")} style={styles.hide} />:
+              <Image source={require("../assets/visiable.png")} style={styles.show} />
+              }
+          </TouchableOpacity>
+          
+        
+        </View>
+        
+        
+        
+
+
       </View>
       <View style={styles.buttonView}>
         <Text style={styles.forgotPassword}> Forgot password ? </Text>
@@ -109,7 +135,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    margin: "10px",
+    margin: "5px",
   },
   buttonView: {
     flex: 1,
@@ -144,6 +170,10 @@ const styles = StyleSheet.create({
     flexDirection : "row",
     alignItems :"center",
     justifyContent: "center"
+    
+  },show:{
+    width: 24,
+    height: 24,
     
   }
 
