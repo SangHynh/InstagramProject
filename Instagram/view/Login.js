@@ -1,21 +1,34 @@
-
-import { StyleSheet, Text, Image, View, TextInput, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 import { useState } from "react";
 import { Button } from "react-native-paper";
 
+// Logo View
+// Input View
+// Button View
+// Facebook View
+// Signup View
+
 export default function Login() {
-  const [passVisiable,setPassVisiable] = useState(false);
+  const [passVisiable, setPassVisiable] = useState(true);
   return (
-    
-
-
     <View style={styles.container}>
       <View style={{ flex: 0.5 }}> </View>
       <View style={styles.logoView}>
-        <Image source={require("../assets/instagram_logo.png")} style={styles.logo} />
+        <Image
+          source={require("../assets/instagram_logo.png")}
+          style={styles.logo}
+        />
       </View>
-      <View >
-        <View style={styles.inputView}> 
+      <View>
+        <View style={styles.inputView}>
           <TextInput
             placeholder="Phone number, user name or email"
             placeholderTextColor={"gray"}
@@ -27,26 +40,34 @@ export default function Login() {
             placeholder="Password"
             placeholderTextColor={"gray"}
             style={styles.textInput}
-            secureTextEntry={passVisiable? false: true}
+            secureTextEntry={passVisiable}
+
           />
           <TouchableOpacity
             onPress={() => {
-              setPassVisiable(!passVisiable)
+              setPassVisiable(!passVisiable);
             }}
-            >
-              {passVisiable?
-              <Image source={require("../assets/invisiable.png")} style={styles.hide} />:
-              <Image source={require("../assets/visiable.png")} style={styles.show} />
-              }
+            style={{
+              width: 25,
+              height: 25,
+              position: "absolute",
+              right: 20,
+              marginTop: 20,
+            }}
+          >
+            {passVisiable ? (
+              <Image
+                source={require("../assets/invisible.png")}
+                style={styles.show_hide}
+              />
+            ) : (
+              <Image
+                source={require("../assets/visible.png")}
+                style={styles.show_hide}
+              />
+            )}
           </TouchableOpacity>
-          
-        
         </View>
-        
-        
-        
-
-
       </View>
       <View style={styles.buttonView}>
         <Text style={styles.forgotPassword}> Forgot password ? </Text>
@@ -63,9 +84,9 @@ export default function Login() {
           <View
             style={{
               flex: 1,
-              marginLeft: 14,
+              marginLeft: 15,
               height: 1,
-              backgroundColor: "black",
+              backgroundColor: "gray",
             }}
           />
           <View>
@@ -76,16 +97,15 @@ export default function Login() {
           <View
             style={{
               flex: 1,
-              marginRight: 14,
+              marginRight: 15,
               height: 1,
-              backgroundColor: "black",
+              backgroundColor: "gray",
             }}
           />
         </View>
         {/* end*/}
       </View>
       <View style={styles.fbView}>
-        
         <Button
           icon="facebook"
           buttonColor="transparent"
@@ -102,14 +122,11 @@ export default function Login() {
             borderBottomWidth: StyleSheet.hairlineWidth,
             flexDirection: "row",
           }}
-        >
-          
-        </View>
-        
+        ></View>
       </View>
       <View style={styles.signUpView}>
-        <Text style= {{margin : 10}} >Don’t have an account?</Text>
-          <Text style={{color :"#0A98E8", fontWeight: "500"}} >Sign Up</Text>
+        <Text style={{ margin: 10 }}>Don’t have an account?</Text>
+        <Text style={{ color: "#0A98E8", fontWeight: "500" }}>Sign Up</Text>
       </View>
     </View>
   );
@@ -132,6 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   inputView: {
+    flex:1,
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
@@ -159,22 +177,22 @@ const styles = StyleSheet.create({
     width: "100%",
     borderColor: "gray",
     borderWidth: 1,
-    marginBottom: 20,
+    marginVertical: 10,
     padding: 10,
     borderRadius: 5,
   },
   fbView: {
     flex: 1,
   },
-  signUpView:{
-    flexDirection : "row",
-    alignItems :"center",
-    justifyContent: "center"
-    
-  },show:{
-    width: 24,
-    height: 24,
-    
-  }
-
+  signUpView: {
+    flex: 0.25,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  show_hide: {
+    width: 25,
+    height: 25,
+    position: "absolute",
+  },
 });
