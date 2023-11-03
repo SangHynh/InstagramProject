@@ -41,7 +41,6 @@ export default function Login() {
             placeholderTextColor={"gray"}
             style={styles.textInput}
             secureTextEntry={passVisiable}
-
           />
           <TouchableOpacity
             onPress={() => {
@@ -149,7 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   inputView: {
-    flex:1,
+    flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
@@ -194,5 +193,5 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     position: "absolute",
-  },
+  }
 });
