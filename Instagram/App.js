@@ -8,10 +8,10 @@ import Profile from './view/Profile';
 export default function App() {
   return (
     <View style={styles.container}>
-     <Login ></Login>
+     {/* <Login ></Login> */}
       {/* <SplashScreen style={styles.splashScreen}></SplashScreen> */}
       {/* <Search/> */}
-      {/* <Profile/> */}
+      <Profile/>
     </View>
   );
 }

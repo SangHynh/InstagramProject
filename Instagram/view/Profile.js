@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, Image, View, TextInput } from 'react-native';
+import { StyleSheet, Text, Image, View, TextInput, TouchableOpacity } from 'react-native';
 
 
 
@@ -54,6 +54,44 @@ export default function Profile() {
             </View>
 
         </View>
+            {/* view chinh sua trang ca nhan */}
+        <View style={{flex : 0.1 , justifyContent : 'space-between' , alignContent: 'center',flexDirection:'row', top: 5, marginHorizontal: 20 }}>
+            <View  style= {{width: '45%',height:'70%', backgroundColor: '#EFEFEF',alignItems:'center', justifyContent: 'center',borderRadius: 10}}>
+                <Text style={{fontWeight: '500'}}>
+                Chỉnh sửa trang cá nhân
+                </Text>
+
+            </View >
+            <View style= {{width: '45%',height:'70%', backgroundColor: '#EFEFEF',alignItems:'center', justifyContent: 'center',borderRadius: 10}}>
+               <Text style={{fontWeight: '500'}}>
+               Chia sẻ trang cá nhân
+               </Text>
+
+            </View>
+            <View style={{width:'8%',height:'70%',backgroundColor: '#EFEFEF', alignItems:'center',justifyContent: 'center',borderRadius: 10}}>
+                <TouchableOpacity   style={{height: 24, width: 24 }}>
+                    <Image source={require('../amage/invite.png')} 
+                        style={{height: 24, width: 24 , fontWeight:'500'}}
+                     />
+                </TouchableOpacity>
+
+
+            </View>
+
+
+        </View>
+        <View style={{flex: 0.1 ,marginTop:10 , flexDirection : 'row' , justifyContent : 'space-around'}}>
+            <TouchableOpacity>
+                <Image source={require('../amage/grid.png')} 
+                style={{width:30, height: 30}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Image  source={require('../amage/user-profile.png')}
+                style={{width:30, height: 30}} />
+            </TouchableOpacity>
+        </View>
+
 
 
 
