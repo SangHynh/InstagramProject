@@ -37,8 +37,7 @@ export default function Home() {
           style={{ width: "50%", height: "90%", resizeMode: "contain" }}
         ></Image>
         <View style={{ width: "30%", flexDirection: "row" }}>
-          <Image
-            source={require("../assets/heart.png")}
+          <TouchableOpacity
             style={{
               width: 32,
               height: 32,
@@ -46,9 +45,17 @@ export default function Home() {
               marginVertical: 15,
               marginHorizontal: 10,
             }}
-          ></Image>
-          <Image
-            source={require("../assets/message.png")}
+          >
+            <Image
+              source={require("../assets/heart.png")}
+              style={{
+                width: 32,
+                height: 32,
+                resizeMode: "contain",
+              }}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={{
               width: 30,
               height: 30,
@@ -56,10 +63,40 @@ export default function Home() {
               marginVertical: 15,
               marginHorizontal: 10,
             }}
-          ></Image>
+          >
+            <Image
+              source={require("../assets/message.png")}
+              style={{
+                width: 30,
+                height: 30,
+                resizeMode: "contain",
+              }}
+            ></Image>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.storyView}>
+        <TouchableOpacity
+          style={{
+            width: 65,
+            height: 65,
+            resizeMode: "cover",
+            borderRadius: 70,
+            marginHorizontal: 5,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Image
+            source={require("../assets/yourStory.png")}
+            style={{
+              width: 65,
+              height: 65,
+              resizeMode: "cover",
+              borderRadius: 40,
+            }}
+          ></Image>
+        </TouchableOpacity>
         <FlatList
           horizontal={true}
           data={postData}
@@ -146,6 +183,7 @@ export default function Home() {
 
               <View style={styles.reactPost}>
                 <TouchableOpacity
+                  key={item.id}
                   style={{ width: 35, height: 35, marginRight: 20 }}
                   onPress={() => {
                     handleClick(item);
@@ -224,6 +262,7 @@ const styles = StyleSheet.create({
   },
   storyView: {
     flex: 1.5,
+    flexDirection: 'row'
   },
   postView: {
     flex: 11,
