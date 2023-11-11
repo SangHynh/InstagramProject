@@ -13,6 +13,13 @@ const url = "https://654afb8a5b38a59f28ee67ec.mockapi.io/post";
 
 export default function Home() {
   const [postData, setPostData] = useState([]);
+  const [like, setLike] = useState(false);
+
+  const handleClick = (itemLiked) => {
+    setLike(!like);
+    console.log(itemLiked.id);
+  };
+
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -66,10 +73,10 @@ export default function Home() {
                   resizeMode: "cover",
                   borderRadius: 70,
                   marginHorizontal: 5,
-                  borderColor: 'green',
+                  borderColor: "green",
                   borderWidth: 3,
-                  alignItems:'center',
-                  justifyContent:'center'
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 <Image
@@ -140,11 +147,21 @@ export default function Home() {
               <View style={styles.reactPost}>
                 <TouchableOpacity
                   style={{ width: 35, height: 35, marginRight: 20 }}
+                  onPress={() => {
+                    handleClick(item);
+                  }}
                 >
-                  <Image
-                    source={require("../assets/heart.png")}
-                    style={{ width: 30, height: 30, resizeMode: "contain" }}
-                  ></Image>
+                  {like ? (
+                    <Image
+                      source={require("../assets/redheart.png")}
+                      style={{ width: 32, height: 32, resizeMode: "contain" }}
+                    ></Image>
+                  ) : (
+                    <Image
+                      source={require("../assets/heart.png")}
+                      style={{ width: 30, height: 30, resizeMode: "contain" }}
+                    ></Image>
+                  )}
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{ width: 35, height: 35, marginRight: 20 }}
