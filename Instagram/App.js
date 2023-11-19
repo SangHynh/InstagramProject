@@ -4,6 +4,7 @@ import { SplashScreen } from './view/SplashScreen';
 import Login from './view/Login';
 import Search from './view/Search';
 import Profile from './view/Profile';
+import Message from './view/Message';
 
 export default function App() {
   return (
@@ -11,7 +12,8 @@ export default function App() {
      {/* <Login ></Login> */}
       {/* <SplashScreen style={styles.splashScreen}></SplashScreen> */}
       {/* <Search/> */}
-      <Profile/>
+      {/* <Profile/> */}
+      <Message />
     </View>
   );
 }

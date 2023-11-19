@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, Image, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
 
 
 
