@@ -28,14 +28,14 @@ export default function Message() {
             <View style={styles.note}>
 
             </View>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', }} >
-                <Text style={{ color: '#000',  fontSize: 16,  fontWeight: 500,}}>Tin nhắn</Text>
-                <Text style={{color: '#0398FC', fontSize:14, fontWeight:400 }}>Tin nhắn đang chờ</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginHorizontal:10 }} >
+                <Text style={{ color: '#000', fontSize: 16, fontWeight: 500, }}>Tin nhắn</Text>
+                <Text style={{ color: '#0398FC', fontSize: 14, fontWeight: 400 }}>Tin nhắn đang chờ</Text>
 
             </View>
-     
+
         </View >
-  );
+    );
 }
 
 const styles = StyleSheet.create({
