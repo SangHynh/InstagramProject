@@ -93,10 +93,6 @@ export default function Profile() {
         </View>
 
 
-
-
-
-
     </View>
   );
 }
