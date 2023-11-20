@@ -5,6 +5,7 @@ import Login from './view/Login';
 import Search from './view/Search';
 import Profile from './view/Profile';
 import Message from './view/Message';
+import ListMess from './view/ListMess';
 
 export default function App() {
   return (
@@ -13,7 +14,8 @@ export default function App() {
       {/* <SplashScreen style={styles.splashScreen}></SplashScreen> */}
       {/* <Search/> */}
       {/* <Profile/> */}
-      <Message />
+      {/* <Message /> */}
+      <ListMess/>
     </View>
   );
 }
