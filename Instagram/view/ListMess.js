@@ -47,10 +47,10 @@ export default function ListMess() {
                                 <Image source={require('../amage/micro.png')}
                                     style={{ height: 30, width: 30, }} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ position: 'absolute' }}>
-                                <Image source={require('../amage/pic.png')}
-                                    style={{ height: 30, width: 30, }} />
-                            </TouchableOpacity>
+                            // <TouchableOpacity style={{ position: 'absolute' }}>
+                            //     <Image source={require('../amage/pic.png')}
+                            //         style={{ height: 30, width: 30, }} />
+                            // </TouchableOpacity>
                         //     <TouchableOpacity style={{ position: 'absolute' }}>
                         //         <Image source={require('../amage/emoji.png')}
                         //             style={{ height: 30, width: 30, }} />
