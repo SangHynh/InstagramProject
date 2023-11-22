@@ -38,7 +38,7 @@ export default function SignUp() {
           <Text style={{ fontSize: 15 }}>Login with Facebook</Text>
         </Button>
         {/* duong thang duoi login --or-- */}
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ flexDirection: "row", alignItems: "center", flex:1 }}>
           <View
             style={{
               flex: 1,
@@ -126,6 +126,14 @@ export default function SignUp() {
           <Text style={{ color: "#0398FC" }}> Privacy Policy</Text> and
           <Text style={{ color: "#0398FC" }}> Cookies Policy</Text>
         </Text>
+        <Button
+          buttonColor="#57CBFC"
+          mode="contained"
+          style={{ margin: 5,marginHorizontal:13, borderRadius: 10 }}
+          onPress={() => console.log(1)}
+        >
+          <Text style={{ fontSize: 15 }}>Sign up</Text>
+        </Button>
       </View>
       <View style={styles.bottomView}>
         <View
@@ -137,17 +145,19 @@ export default function SignUp() {
           }}
         ></View>
         <View>
-        <Text style={{
-            textAlign: "center",
-            color: "#878787",
-            fontSize: 20,
-            fontWeight: 450,
-            marginHorizontal: 10,
-            marginVertical:5
-          }}>
-          Have an account?
-          <Text style={{ color: "#0398FC" }}>   Login</Text>
-        </Text>
+          <Text
+            style={{
+              textAlign: "center",
+              color: "#878787",
+              fontSize: 20,
+              fontWeight: 450,
+              marginHorizontal: 10,
+              marginVertical: 5,
+            }}
+          >
+            Have an account?
+            <Text style={{ color: "#0398FC" }}> Login</Text>
+          </Text>
         </View>
       </View>
     </View>
@@ -155,9 +165,7 @@ export default function SignUp() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
   logoView: {
     flex: 1,
   },
@@ -169,7 +177,7 @@ const styles = StyleSheet.create({
     flex: 0.5,
   },
   bottomView: {
-    flex: 0.2,
+    flex: 0.3,
   },
   textInput: {
     width: "auto",
