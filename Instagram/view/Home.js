@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 
 const url = "https://654afb8a5b38a59f28ee67ec.mockapi.io/post";
 
-export default function Home() {
+export default function Home({navigation}) {
   const [postData, setPostData] = useState([]);
   const [like, setLike] = useState(false);
 
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   storyView: {
-    flex: 1.5,
+    flex: 2,
     flexDirection: 'row'
   },
   postView: {

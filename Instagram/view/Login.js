@@ -16,7 +16,7 @@ import { Button } from "react-native-paper";
 // Facebook View
 // Signup View
 
-export default function Login() {
+export default function Login({navigation}) {
   const [passVisiable, setPassVisiable] = useState(true);
   return (
     <View style={styles.container}>
@@ -74,7 +74,9 @@ export default function Login() {
           buttonColor="#57CBFC"
           mode="contained"
           style={styles.button}
-          onPress={() => console.log(1)}
+          onPress={() => {
+            navigation.navigate('Home')
+          }}
         >
           <Text style={{ fontSize: 15 }}>Login</Text>
         </Button>
