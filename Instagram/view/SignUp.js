@@ -1,0 +1,190 @@
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React, { useState } from "react";
+import { Button } from "react-native-paper";
+
+export default function SignUp() {
+  const [passVisible, setPassVisible] = useState(true);
+  return (
+    <View style={styles.container}>
+      <View style={styles.logoView}>
+        <Image
+          source={require("../assets/instagram_logo.png")}
+          style={{ width: "auto", height: 80, resizeMode: "contain" }}
+        />
+        <Text
+          style={{
+            textAlign: "center",
+            color: "#878787",
+            marginHorizontal: 15,
+            fontSize: 26,
+          }}
+        >
+          Sign up to see photos videos from your friends.
+        </Text>
+        <Button
+          buttonColor="#0398FC"
+          mode="contained"
+          icon={"facebook"}
+          style={{ margin: 15, borderRadius: 10 }}
+          onPress={() => console.log(1)}
+        >
+          <Text style={{ fontSize: 15 }}>Login with Facebook</Text>
+        </Button>
+        {/* duong thang duoi login --or-- */}
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View
+            style={{
+              flex: 1,
+              marginLeft: 15,
+              height: 1,
+              backgroundColor: "gray",
+            }}
+          />
+          <View>
+            <Text style={{ width: 40, textAlign: "center", color: "#868383" }}>
+              OR
+            </Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              marginRight: 15,
+              height: 1,
+              backgroundColor: "gray",
+            }}
+          />
+        </View>
+        {/* end*/}
+      </View>
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Phone number or Email"
+        ></TextInput>
+        <TextInput style={styles.textInput} placeholder="Full Name"></TextInput>
+        <TextInput style={styles.textInput} placeholder="User Name"></TextInput>
+        <View>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Password"
+            secureTextEntry={passVisible}
+          ></TextInput>
+          <TouchableOpacity
+            style={{
+              width: 30,
+              height: 30,
+              position: "absolute",
+              right: 30,
+              marginTop: 15,
+            }}
+            onPress={() => {
+              setPassVisible(!passVisible);
+            }}
+          >
+            {passVisible ? (
+              <Image
+                source={require("../assets/invisible.png")}
+                style={styles.show_hide}
+              ></Image>
+            ) : (
+              <Image
+                source={require("../assets/visible.png")}
+                style={styles.show_hide}
+              ></Image>
+            )}
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.detailView}>
+        <Text
+          style={{
+            textAlign: "center",
+            color: "#878787",
+            fontSize: 15,
+          }}
+        >
+          People who use our service may have uploaded your contact information.
+          to Instagram. <Text style={{ color: "#0398FC" }}>Learn more</Text>
+        </Text>
+        <Text
+          style={{
+            textAlign: "center",
+            color: "#878787",
+            fontSize: 15,
+            marginHorizontal: 10,
+          }}
+        >
+          By signing up, you agree to our
+          <Text style={{ color: "#0398FC" }}> Term</Text>,
+          <Text style={{ color: "#0398FC" }}> Privacy Policy</Text> and
+          <Text style={{ color: "#0398FC" }}> Cookies Policy</Text>
+        </Text>
+      </View>
+      <View style={styles.bottomView}>
+        <View
+          style={{
+            flex: 0.95,
+            borderBottomColor: "gray",
+            borderBottomWidth: StyleSheet.hairlineWidth,
+            flexDirection: "row",
+          }}
+        ></View>
+        <View>
+        <Text style={{
+            textAlign: "center",
+            color: "#878787",
+            fontSize: 20,
+            fontWeight: 450,
+            marginHorizontal: 10,
+            marginVertical:5
+          }}>
+          Have an account?
+          <Text style={{ color: "#0398FC" }}>   Login</Text>
+        </Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  logoView: {
+    flex: 1,
+  },
+  inputView: {
+    marginTop: 10,
+    flex: 1.2,
+  },
+  detailView: {
+    flex: 0.5,
+  },
+  bottomView: {
+    flex: 0.2,
+  },
+  textInput: {
+    width: "auto",
+    height: 40,
+    borderColor: "#F3F3F3",
+    backgroundColor: "#FAFAFA",
+    borderWidth: 1,
+    marginVertical: 10,
+    marginHorizontal: 15,
+    color: "#878787",
+    padding: 15,
+  },
+  show_hide: {
+    width: 30,
+    height: 30,
+    resizeMode: "contain",
+  },
+});
