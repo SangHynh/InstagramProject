@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, Image, View } from 'react-native';
 import { SplashScreen } from './view/SplashScreen';
@@ -18,3 +19,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
