@@ -1,8 +1,14 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 
-export function SplashScreen() {
+export function SplashScreen({navigation}) {
+ 
+  const showImage = () => {
+    setTimeout(() => {
+        navigation.navigate('Login')
+    }, 1500);
+}
   return (
-    <View style={styles.container}>
+    <View style={styles.container}>{showImage()}
       <View style={styles.top}></View>
       <View style={styles.center}>
         <Image source={require("../assets/logoIG.png")} style={styles.logo} />

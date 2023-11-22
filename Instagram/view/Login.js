@@ -75,7 +75,7 @@ export default function Login({navigation}) {
           mode="contained"
           style={styles.button}
           onPress={() => {
-            navigation.navigate('Home')
+            navigation.navigate('Home');
           }}
         >
           <Text style={{ fontSize: 15 }}>Login</Text>
