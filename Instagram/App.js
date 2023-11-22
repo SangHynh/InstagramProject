@@ -5,11 +5,12 @@ import Login from './view/Login';
 import SignUp from './view/SignUp';
 import Home from './view/Home';
 import Api from './view/Api';
+import Reels from './view/Reels';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Home></Home>
+      <Reels></Reels>
     </View>
   );
 }

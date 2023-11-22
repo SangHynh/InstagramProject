@@ -18,10 +18,19 @@ export default function Api() {
     },[]);
 
   return (
-
-    
-
     <View>
+    <FlatList
+      data={data}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => (
+        <View key={item.id}>
+          {console.log(item.id)}
+        </View>
+      )}
+    ></FlatList>
+
+
+
         <Text></Text>
         {console.log('view')}
       <Text></Text>
