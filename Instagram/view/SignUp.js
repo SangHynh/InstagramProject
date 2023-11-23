@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     flex: 0.3,
+    bottom:0
   },
   textInput: {
     width: "auto",
