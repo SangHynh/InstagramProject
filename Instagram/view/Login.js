@@ -16,7 +16,7 @@ import { Button } from "react-native-paper";
 // Facebook View
 // Signup View
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [passVisiable, setPassVisiable] = useState(true);
   return (
     <View style={styles.container}>
@@ -75,13 +75,13 @@ export default function Login({navigation}) {
           mode="contained"
           style={styles.button}
           onPress={() => {
-            navigation.navigate('Home');
+            navigation.navigate("Home");
           }}
         >
           <Text style={{ fontSize: 15 }}>Login</Text>
         </Button>
         {/* duong thang duoi login --or-- */}
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ flexDirection: "row", alignItems: "center", flex: 0.2 }}>
           <View
             style={{
               flex: 1,
@@ -113,6 +113,7 @@ export default function Login({navigation}) {
           mode="text"
           onPress={() => console.log("Pressed")}
           textColor="#0A98E8"
+          style={{ height: 10 }}
         >
           <Text>Continue with Facebook</Text>
         </Button>
@@ -125,9 +126,25 @@ export default function Login({navigation}) {
           }}
         ></View>
       </View>
+      <View
+          style={{
+            borderBottomColor: "gray",
+            borderBottomWidth: StyleSheet.hairlineWidth,
+            flexDirection: "row",
+            flex: 0.3,
+          }}
+        ></View>
       <View style={styles.signUpView}>
-        <Text style={{ margin: 10 }}>Don’t have an account?</Text>
-        <Text style={{ color: "#0A98E8", fontWeight: "500" }}>Sign Up</Text>
+        
+        <Text style={{ margin: 10 , fontSize:15, color: "#878787"}}>Don’t have an account?</Text>
+        <TouchableOpacity
+          style={{ color: "#1886D8", fontWeight: "500",marginTop:3,fontSize:15 }}
+          onPress={() => {
+            navigation.navigate("SignUp");
+          }}
+        >
+          Sign Up
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -135,8 +152,8 @@ export default function Login({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
+    flex: 1,
   },
   logo: {
     flex: 1,
@@ -156,9 +173,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: "5px",
   },
-  buttonView: {
-    flex: 1,
-  },
+  buttonView: {},
   forgotPassword: {
     textAlign: "right",
     color: "#2596D6",
@@ -183,10 +198,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   fbView: {
-    flex: 1,
+    flex: 0.5,
+    alignItems: "center",
+    justifyContent: "center",
   },
   signUpView: {
-    flex: 0.25,
+    flex: 0.2,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -195,5 +212,5 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     position: "absolute",
-  }
+  },
 });

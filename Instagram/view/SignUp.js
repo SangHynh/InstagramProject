@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import { Button } from "react-native-paper";
 
-export default function SignUp() {
+export default function SignUp({ navigation }) {
   const [passVisible, setPassVisible] = useState(true);
   return (
     <View style={styles.container}>
@@ -38,7 +38,7 @@ export default function SignUp() {
           <Text style={{ fontSize: 15 }}>Login with Facebook</Text>
         </Button>
         {/* duong thang duoi login --or-- */}
-        <View style={{ flexDirection: "row", alignItems: "center", flex:1 }}>
+        <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
           <View
             style={{
               flex: 1,
@@ -129,34 +129,43 @@ export default function SignUp() {
         <Button
           buttonColor="#57CBFC"
           mode="contained"
-          style={{ margin: 5,marginHorizontal:13, borderRadius: 10 }}
+          style={{ margin: 5, marginHorizontal: 13, borderRadius: 10 }}
           onPress={() => console.log(1)}
         >
           <Text style={{ fontSize: 15 }}>Sign up</Text>
         </Button>
       </View>
       <View style={styles.bottomView}>
+        {/* Đường thẳng */}
         <View
           style={{
-            flex: 0.95,
             borderBottomColor: "gray",
             borderBottomWidth: StyleSheet.hairlineWidth,
             flexDirection: "row",
+            flex: 1,
           }}
         ></View>
-        <View>
+        <View style={{ flex: 1 }}>
           <Text
             style={{
               textAlign: "center",
               color: "#878787",
-              fontSize: 20,
+              fontSize: 15,
               fontWeight: 450,
               marginHorizontal: 10,
               marginVertical: 5,
             }}
           >
             Have an account?
-            <Text style={{ color: "#0398FC" }}> Login</Text>
+            <TouchableOpacity
+              style={{ color: "#0398FC", marginTop:5 }}
+              onPress={() => {
+                navigation.navigate("Login");
+              }}
+            >
+              {" "}
+              Login
+            </TouchableOpacity>
           </Text>
         </View>
       </View>
@@ -165,7 +174,8 @@ export default function SignUp() {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+  },
   logoView: {
     flex: 1,
   },
@@ -182,8 +192,9 @@ const styles = StyleSheet.create({
   textInput: {
     width: "auto",
     height: 40,
-    borderColor: "#F3F3F3",
+    borderColor: "rgb(200,200,200)",
     backgroundColor: "#FAFAFA",
+    borderRadius: 10,
     borderWidth: 1,
     marginVertical: 10,
     marginHorizontal: 15,
