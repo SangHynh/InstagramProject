@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -14,8 +14,18 @@ const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
 
 export default function ListMess({ navigation, route }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const { user } = route.params;
+  const userID = user.id;
+  const url = "https://655e1ce79f1e1093c59a8ac5.mockapi.io/message/"+userID;
+  const [data, setData] = useState({});
+  const fc = () => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {setData(json);
+      console.log(json);});
+  };
+  useEffect(fc,[]);
 
   return (
     <View style={styles.container}>
@@ -35,13 +45,13 @@ export default function ListMess({ navigation, route }) {
             />
           </TouchableOpacity>
           <Image
-            source={{ uri: user.avatar }}
+            source={{ uri: data.avatar }}
             style={{ height: 45, width: 45, borderRadius: 50 }}
           />
           <Text
             style={{ color: "#000", fontSize: 20, fontWeight: "600", left: 5 }}
           >
-            {user.user}
+            {data.user}
           </Text>
         </View>
         <View style={styles.headRight}>
@@ -61,7 +71,7 @@ export default function ListMess({ navigation, route }) {
       </View>
       <View style={styles.body}>
         <FlatList
-          data={user.message}
+          data={data.message}
           keyExtractor={(item) => item.id_Mess}
           renderItem={({ item }) => (
             <View
@@ -74,7 +84,7 @@ export default function ListMess({ navigation, route }) {
             >
               {item.isSender == false ? (
                 <Image
-                  source={{ uri: user.avatar }}
+                  source={{ uri: data.avatar }}
                   style={{
                     width: 50,
                     height: 50,
@@ -131,6 +141,7 @@ export default function ListMess({ navigation, route }) {
           </TouchableOpacity>
           <TextInput
             placeholder="Nhắn tin..."
+            value={text}
             onChangeText={(input) => {
               setText(input);
             }}
@@ -141,6 +152,7 @@ export default function ListMess({ navigation, route }) {
               color: "#686767",
               padding: 20,
               paddingLeft: 60,
+              paddingRight: 50,
             }}
           />
           {text == "" ? (
@@ -179,7 +191,36 @@ export default function ListMess({ navigation, route }) {
               </TouchableOpacity>
             </View>
           ) : (
-            <TouchableOpacity style={{ position: "absolute", right: 2 }}>
+            <TouchableOpacity
+              style={{ position: "absolute", right: 2 }}
+              onPress={() => {
+                // thêm tin nhắn
+                var currentMessages = data.message;
+                var newMessage = {
+                  isSender: true,
+                  content: text,
+                };
+                var modifiedMessages = [...currentMessages, newMessage];
+
+                fetch(url, {
+                  method: "PUT",
+                  body: JSON.stringify({
+                    message: modifiedMessages,
+                  }),
+                  headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                  },
+                })
+                  .then((res) => res.json())
+                  .then(() => {
+                    console.log(data);
+                    console.log(user);
+                    console.log('sended');
+                    fc();
+                    setText('');
+                  });
+              }}
+            >
               <Image
                 source={require("../amage/send.png")}
                 style={{ height: 30, width: 30 }}

@@ -27,11 +27,6 @@ export default function Home({ navigation }) {
       });
   };
 
-  // const likePost = (item)=>{
-  //   var link = url+'/'+item.id;
-  //   console.log(link)
-  // }
-
   useEffect(fc, []);
 
   return (
