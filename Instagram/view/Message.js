@@ -15,9 +15,15 @@ const url = "https://655e1ce79f1e1093c59a8ac5.mockapi.io/message"; //url tin nhá
 const url2 = "https://654afb8a5b38a59f28ee67ec.mockapi.io/post"; //url story
 
 export default function Message({navigation,route}) {
-  const getLastMessageContent = (user) => {
+  const getLastMessageContent = (user, maxCharacters) => {
     const lastMessage = user.message[user.message.length - 1];
-    return lastMessage ? lastMessage.content : "";
+    if (lastMessage) {
+      const content = lastMessage.content;
+      return content.length > maxCharacters
+        ? `${content.substring(0, maxCharacters)}...`
+        : content;
+    }
+    return "";
   };
 
   const [data, setData] = useState([]);
@@ -185,7 +191,7 @@ export default function Message({navigation,route}) {
               <View style={{ flex: 5, justifyContent: "center", padding: 15 }}>
                 <Text style={{ fontWeight: 700 }}>{item.user}</Text>
                 <Text style={{ color: "rgba(0, 0, 0, 0.68)" }}>
-                  {getLastMessageContent(item)}
+                  {getLastMessageContent(item,35)}
                 </Text>
               </View>
               <View
