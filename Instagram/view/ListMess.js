@@ -7,33 +7,41 @@ import {
   Text,
   TextInput,
   Dimensions,
+  FlatList,
 } from "react-native";
 
 const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
 
-export default function ListMess() {
+export default function ListMess({ navigation, route }) {
   const [text, setText] = useState("");
+  const { user } = route.params;
+
   return (
     <View style={styles.container}>
       <View style={styles.head}>
         <View
           style={{ flexDirection: "row", alignItems: "center", width: "80%" }}
         >
-          <TouchableOpacity style={{ justifyContent: "center" }}>
+          <TouchableOpacity
+            style={{ justifyContent: "center" }}
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
             <Image
               source={require("../amage/back.png")}
-              style={{ height: 35, width: 35 }}
+              style={{ height: 30, width: 30, marginRight: 15 }}
             />
           </TouchableOpacity>
           <Image
-            source={require("../amage/avatar.png")}
-            style={{ height: 50, width: 50 }}
+            source={{ uri: user.avatar }}
+            style={{ height: 45, width: 45, borderRadius: 50 }}
           />
           <Text
             style={{ color: "#000", fontSize: 20, fontWeight: "600", left: 5 }}
           >
-            jessica
+            {user.user}
           </Text>
         </View>
         <View style={styles.headRight}>
@@ -51,7 +59,55 @@ export default function ListMess() {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.body}></View>
+      <View style={styles.body}>
+        <FlatList
+          data={user.message}
+          keyExtractor={(item) => item.id_Mess}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                alignSelf: item.isSender ? "flex-end" : "flex-start",
+                margin: 5,
+                maxWidth: "70%",
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginVertical:5
+                }}
+              >
+                {item.isSender == false ? (
+                  <Image
+                    source={{ uri: user.avatar }}
+                    style={{ width: 50, height: 50, borderRadius: 50, marginHorizontal:10 }}
+                  ></Image>
+                ) : (
+                  ""
+                )}
+                <View
+                  style={{
+                    padding: 15,
+                    backgroundColor: item.isSender
+                      ? "rgba(102, 38, 237, 0.98)"
+                      : "rgb(230,230,230)",
+                    flexDirection: "row",
+                    borderRadius: 10,
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: item.isSender ? "white" : "black",
+                    }}
+                  >
+                    {item.content}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          )}
+        />
+      </View>
       <View style={styles.foot}>
         <View style={styles.input}>
           <TouchableOpacity
@@ -83,7 +139,6 @@ export default function ListMess() {
               color: "#686767",
               padding: 20,
               paddingLeft: 60,
-              
             }}
           />
           {text == "" ? (
@@ -96,19 +151,25 @@ export default function ListMess() {
                 right: 10,
               }}
             >
-              <TouchableOpacity style={{ position: "relative", marginHorizontal: 5 }}>
+              <TouchableOpacity
+                style={{ position: "relative", marginHorizontal: 5 }}
+              >
                 <Image
                   source={require("../amage/micro.png")}
                   style={{ height: 30, width: 30 }}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{ position: "relative",  marginHorizontal: 5 }}>
+              <TouchableOpacity
+                style={{ position: "relative", marginHorizontal: 5 }}
+              >
                 <Image
                   source={require("../amage/pic.png")}
                   style={{ height: 30, width: 30 }}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{ position: "relative",  marginHorizontal: 5 }}>
+              <TouchableOpacity
+                style={{ position: "relative", marginHorizontal: 5 }}
+              >
                 <Image
                   source={require("../amage/emoji.png")}
                   style={{ height: 30, width: 30 }}
@@ -134,7 +195,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   head: {
-    height: 0.1*height,
+    height: 0.1 * height,
     width: "auto",
     borderBottomColor: "#CDCDCD",
     borderBottomWidth: 1,
@@ -147,12 +208,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  body:{
-    height:0.8*height
-  }
-  ,
+  body: {
+    height: 0.8 * height,
+  },
   foot: {
-    height: 0.1*height,
+    height: 0.1 * height,
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",

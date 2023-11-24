@@ -14,7 +14,7 @@ const { height } = Dimensions.get("window");
 const url = "https://655e1ce79f1e1093c59a8ac5.mockapi.io/message"; //url tin nhắn
 const url2 = "https://654afb8a5b38a59f28ee67ec.mockapi.io/post"; //url story
 
-export default function Message() {
+export default function Message({navigation,route}) {
   const getLastMessageContent = (user) => {
     const lastMessage = user.message[user.message.length - 1];
     return lastMessage ? lastMessage.content : "";
@@ -42,7 +42,7 @@ export default function Message() {
     <View style={styles.container}>
       <View style={styles.head}>
         <View style={styles.head1}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{navigation.goBack()}}>
             <Image
               source={require("../amage/back.png")}
               style={{ width: 25, height: 25 }}
@@ -164,7 +164,9 @@ export default function Message() {
           data={data}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity key={item.id} style={styles.item}>
+            <TouchableOpacity key={item.id} style={styles.item} onPress={()=>{
+              navigation.navigate('ListMess',{user:item})
+            }}>
               <View
                 style={{
                   flex: 1,

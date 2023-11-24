@@ -6,8 +6,8 @@ import Message from './view/Message'
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <Root></Root> */}
-      <Message></Message>
+      <Root></Root>
+      {/* <Message></Message> */}
     </View>
   );
 }

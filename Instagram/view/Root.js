@@ -6,6 +6,8 @@ import Home from "./Home";
 import TabNavigation from "./TabNavigation";
 import { SplashScreen } from "./SplashScreen";
 import SignUp from "./SignUp"
+import Message from "./Message";
+import ListMess from "./ListMess"
 const Stack = createNativeStackNavigator();
 export default function Root() {
 
@@ -18,8 +20,10 @@ export default function Root() {
           <Stack.Screen name="Splash" component={SplashScreen}></Stack.Screen>
           <Stack.Screen name="Login" component={Login}></Stack.Screen>
           <Stack.Screen name="SignUp" component={SignUp}></Stack.Screen>
-
           <Stack.Screen name="Home" component={TabNavigation}></Stack.Screen>
+          <Stack.Screen name="Message" component={Message}></Stack.Screen>
+          <Stack.Screen name="ListMess" component={ListMess}></Stack.Screen>
+
         </Stack.Navigator>
       </NavigationContainer>
     );

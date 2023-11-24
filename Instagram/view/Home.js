@@ -11,13 +11,12 @@ import React, { useEffect, useState } from "react";
 
 const url = "https://654afb8a5b38a59f28ee67ec.mockapi.io/post";
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   const [postData, setPostData] = useState([]);
   const [like, setLike] = useState(false);
 
   const handleClick = (itemLiked) => {
     setLike(!like);
-    console.log(itemLiked.id);
   };
 
   useEffect(() => {
@@ -62,6 +61,9 @@ export default function Home({navigation}) {
               resizeMode: "contain",
               marginVertical: 15,
               marginHorizontal: 10,
+            }}
+            onPress={()=>{
+              navigation.navigate('Message')
             }}
           >
             <Image
@@ -262,7 +264,7 @@ const styles = StyleSheet.create({
   },
   storyView: {
     flex: 2,
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   postView: {
     flex: 11,
