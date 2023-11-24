@@ -13,12 +13,6 @@ const url = "https://654afb8a5b38a59f28ee67ec.mockapi.io/post";
 
 export default function Home({ navigation }) {
   const [postData, setPostData] = useState([]);
-  const [like, setLike] = useState(false);
-
-  const handleClick = (itemLiked) => {
-    setLike(!like);
-  };
-
   const fc = () => {
     fetch(url)
       .then((response) => response.json())

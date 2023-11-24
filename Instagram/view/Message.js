@@ -14,9 +14,9 @@ const { height } = Dimensions.get("window");
 const url = "https://655e1ce79f1e1093c59a8ac5.mockapi.io/message"; //url tin nhắn
 const url2 = "https://654afb8a5b38a59f28ee67ec.mockapi.io/post"; //url story
 
-export default function Message({navigation,route}) {
+export default function Message({ navigation, route }) {
   const getLastMessageContent = (user, maxCharacters) => {
-    const lastMessage = user.message[user.message.length - 1];
+    const lastMessage = user.message[user.message.length - 1]; //lấy tin cuối cùng
     if (lastMessage) {
       const content = lastMessage.content;
       return content.length > maxCharacters
@@ -26,8 +26,8 @@ export default function Message({navigation,route}) {
     return "";
   };
 
-  const [data, setData] = useState([]);
-  const [data2, setData2] = useState([]);
+  const [data, setData] = useState([]); //data tin nhắn
+  const [data2, setData2] = useState([]); //data story
 
   const fc = () => {
     fetch(url)
@@ -48,7 +48,11 @@ export default function Message({navigation,route}) {
     <View style={styles.container}>
       <View style={styles.head}>
         <View style={styles.head1}>
-          <TouchableOpacity onPress={()=>{navigation.goBack()}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
             <Image
               source={require("../amage/back.png")}
               style={{ width: 25, height: 25 }}
@@ -59,14 +63,18 @@ export default function Message({navigation,route}) {
           </Text>
         </View>
         <View style={styles.head2}>
-          <Image
-            source={require("../amage/videocamera.png")}
-            style={{ width: 30, height: 30 }}
-          />
-          <Image
-            source={require("../amage/edit.png")}
-            style={{ width: 25, height: 25 }}
-          />
+          <TouchableOpacity style={{ width: 30, height: 30 }}>
+            <Image
+              source={require("../amage/videocamera.png")}
+              style={{ width: 30, height: 30 }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={{ width: 30, height: 30 }}>
+            <Image
+              source={require("../amage/edit.png")}
+              style={{ width: 25, height: 25 }}
+            />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -90,8 +98,8 @@ export default function Message({navigation,route}) {
                 height: 60,
                 resizeMode: "cover",
                 borderRadius: 40,
-                borderColor:'rgb(230,230,230)',
-                borderWidth:2
+                borderColor: "rgb(230,230,230)",
+                borderWidth: 2,
               }}
             ></Image>
           </TouchableOpacity>
@@ -114,7 +122,11 @@ export default function Message({navigation,route}) {
           renderItem={({ item }) => (
             <View
               key={item.id}
-              style={{ width: 80, justifyContent:'center',alignItems:'center' }}
+              style={{
+                width: 80,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
               horizontal
             >
               <TouchableOpacity
@@ -145,7 +157,7 @@ export default function Message({navigation,route}) {
                   fontSize: 11,
                   fontWeight: 400,
                   color: "rgba(0, 0, 0, 0.6)",
-                  marginVertical:5
+                  marginVertical: 5,
                 }}
               >
                 {item.userName}
@@ -173,9 +185,27 @@ export default function Message({navigation,route}) {
           data={data}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity key={item.id} style={styles.item} onPress={()=>{
-              navigation.navigate('ListMess',{user:item})
-            }}>
+            <TouchableOpacity
+              key={item.id}
+              style={styles.item}
+              onPress={() => {
+                navigation.navigate("ListMess", { user: item });
+                var link = url + "/" + item.id;
+                fetch(link, {
+                  method: "PUT",
+                  body: JSON.stringify({
+                    isReaded: true,
+                  }),
+                  headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                  },
+                })
+                  .then((res) => res.json())
+                  .then(() => {
+                    fc();
+                  });
+              }}
+            >
               <View
                 style={{
                   flex: 1,
@@ -189,9 +219,9 @@ export default function Message({navigation,route}) {
                 ></Image>
               </View>
               <View style={{ flex: 5, justifyContent: "center", padding: 15 }}>
-                <Text style={{ fontWeight: 700 }}>{item.user}</Text>
-                <Text style={{ color: "rgba(0, 0, 0, 0.68)" }}>
-                  {getLastMessageContent(item,35)}
+                <Text style={ item.isReaded? {fontWeight: '500',fontSize:15,color: "rgba(0, 0, 0, 0.6)"} :{ fontWeight: 'bold',fontSize:15 }}>{item.user}</Text>
+                <Text style={item.isReaded? { color: "rgba(0, 0, 0, 0.68)" }:{color:'black', fontWeight:'500'}}>
+                  {getLastMessageContent(item, 35)}
                 </Text>
               </View>
               <View
