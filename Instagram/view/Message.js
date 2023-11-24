@@ -72,7 +72,7 @@ export default function Message({navigation,route}) {
               height: 65,
               resizeMode: "cover",
               borderRadius: 70,
-              marginHorizontal: 5,
+              marginHorizontal: 18,
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -80,10 +80,12 @@ export default function Message({navigation,route}) {
             <Image
               source={require("../amage/avatar.png")}
               style={{
-                width: 65,
-                height: 65,
+                width: 60,
+                height: 60,
                 resizeMode: "cover",
                 borderRadius: 40,
+                borderColor:'rgb(230,230,230)',
+                borderWidth:2
               }}
             ></Image>
           </TouchableOpacity>
@@ -93,7 +95,7 @@ export default function Message({navigation,route}) {
               fontWeight: 400,
               color: "rgba(0, 0, 0, 0.41)",
               marginHorizontal: 5,
-              marginVertical: 5,
+              marginVertical: 4,
             }}
           >
             Ghi chú của bạn
@@ -106,16 +108,16 @@ export default function Message({navigation,route}) {
           renderItem={({ item }) => (
             <View
               key={item.id}
-              style={{ width: 120 }}
+              style={{ width: 80, justifyContent:'center',alignItems:'center' }}
               horizontal
             >
               <TouchableOpacity
                 style={{
-                  width: 70,
-                  height: 70,
+                  width: 60,
+                  height: 60,
                   resizeMode: "cover",
                   borderRadius: 70,
-                  marginHorizontal: 5,
+                  marginHorizontal: 1,
                   borderColor: "green",
                   borderWidth: 3,
                   alignItems: "center",
@@ -125,8 +127,8 @@ export default function Message({navigation,route}) {
                 <Image
                   source={{ uri: item.avatar }}
                   style={{
-                    width: 60,
-                    height: 60,
+                    width: 55,
+                    height: 55,
                     resizeMode: "cover",
                     borderRadius: 40,
                   }}
@@ -134,9 +136,10 @@ export default function Message({navigation,route}) {
               </TouchableOpacity>
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 11,
                   fontWeight: 400,
                   color: "rgba(0, 0, 0, 0.6)",
+                  marginVertical:5
                 }}
               >
                 {item.userName}

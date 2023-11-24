@@ -66,43 +66,45 @@ export default function ListMess({ navigation, route }) {
           renderItem={({ item }) => (
             <View
               style={{
-                alignSelf: item.isSender ? "flex-end" : "flex-start",
-                margin: 5,
-                maxWidth: "70%",
+                flexDirection: "row",
+                marginVertical: 5,
+                justifyContent: item.isSender ? "flex-end" : "flex-start",
+                marginHorizontal: 10,
               }}
             >
+              {item.isSender == false ? (
+                <Image
+                  source={{ uri: user.avatar }}
+                  style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: 50,
+                    marginHorizontal: 10,
+                  }}
+                ></Image>
+              ) : (
+                ""
+              )}
+              {/* khung tin nhắn */}
               <View
                 style={{
+                  padding: 15,
+                  backgroundColor: item.isSender
+                    ? "rgba(102, 38, 237, 0.98)"
+                    : "rgb(230,230,230)",
                   flexDirection: "row",
-                  marginVertical:5
+                  borderRadius: 15,
+                  flexWrap: "wrap",
+                  maxWidth: "70%",
                 }}
               >
-                {item.isSender == false ? (
-                  <Image
-                    source={{ uri: user.avatar }}
-                    style={{ width: 50, height: 50, borderRadius: 50, marginHorizontal:10 }}
-                  ></Image>
-                ) : (
-                  ""
-                )}
-                <View
+                <Text
                   style={{
-                    padding: 15,
-                    backgroundColor: item.isSender
-                      ? "rgba(102, 38, 237, 0.98)"
-                      : "rgb(230,230,230)",
-                    flexDirection: "row",
-                    borderRadius: 10,
+                    color: item.isSender ? "white" : "black",
                   }}
                 >
-                  <Text
-                    style={{
-                      color: item.isSender ? "white" : "black",
-                    }}
-                  >
-                    {item.content}
-                  </Text>
-                </View>
+                  {item.content}
+                </Text>
               </View>
             </View>
           )}

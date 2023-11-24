@@ -19,14 +19,20 @@ export default function Home({ navigation }) {
     setLike(!like);
   };
 
-  useEffect(() => {
+  const fc = () => {
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
         setPostData(json);
-        console.log(json);
       });
-  }, []);
+  };
+
+  // const likePost = (item)=>{
+  //   var link = url+'/'+item.id;
+  //   console.log(link)
+  // }
+
+  useEffect(fc, []);
 
   return (
     <View style={styles.container}>
@@ -62,8 +68,8 @@ export default function Home({ navigation }) {
               marginVertical: 15,
               marginHorizontal: 10,
             }}
-            onPress={()=>{
-              navigation.navigate('Message')
+            onPress={() => {
+              navigation.navigate("Message");
             }}
           >
             <Image
@@ -78,56 +84,66 @@ export default function Home({ navigation }) {
         </View>
       </View>
       <View style={styles.storyView}>
-        <TouchableOpacity
-          style={{
-            width: 65,
-            height: 65,
-            resizeMode: "cover",
-            borderRadius: 70,
-            marginHorizontal: 5,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Image
-            source={require("../assets/yourStory.png")}
+        <View>
+          <TouchableOpacity
             style={{
-              width: 65,
-              height: 65,
+              width: 60,
+              height: 60,
               resizeMode: "cover",
-              borderRadius: 40,
+              borderRadius: 60,
+              marginHorizontal: 5,
+              alignItems: "center",
+              justifyContent: "center",
             }}
-          ></Image>
-        </TouchableOpacity>
+          >
+            <Image
+              source={require("../assets/yourStory.png")}
+              style={{
+                width: 55,
+                height: 55,
+                resizeMode: "cover",
+                borderRadius: 40,
+              }}
+            ></Image>
+          </TouchableOpacity>
+          <Text style={{ textAlign: "center" }}>Tin của bạn</Text>
+        </View>
         <FlatList
           horizontal={true}
           data={postData}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <View key={item.id} style={styles.storyContainer} horizontal>
-              <TouchableOpacity
-                style={{
-                  width: 70,
-                  height: 70,
-                  resizeMode: "cover",
-                  borderRadius: 70,
-                  marginHorizontal: 5,
-                  borderColor: "green",
-                  borderWidth: 3,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  source={{ uri: item.avatar }}
+            <View key={item.id} style={styles.storyContainer}>
+              <View>
+                <TouchableOpacity
                   style={{
                     width: 60,
                     height: 60,
                     resizeMode: "cover",
-                    borderRadius: 40,
+                    borderRadius: 55,
+                    marginHorizontal: 15,
+                    borderColor: "green",
+                    borderWidth: 3,
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
-                ></Image>
-              </TouchableOpacity>
+                >
+                  <Image
+                    source={{ uri: item.avatar }}
+                    style={{
+                      width: 50,
+                      height: 50,
+                      resizeMode: "cover",
+                      borderRadius: 40,
+                    }}
+                  ></Image>
+                </TouchableOpacity>
+                <Text
+                  style={{ textAlign: "center", color: "rgb(100,100,100)" }}
+                >
+                  {item.userName}
+                </Text>
+              </View>
             </View>
           )}
         />
@@ -145,8 +161,8 @@ export default function Home({ navigation }) {
                 <Image
                   source={{ uri: item.avatar }}
                   style={{
-                    width: 55,
-                    height: 55,
+                    width: 50,
+                    height: 50,
                     marginVertical: 1,
                     marginHorizontal: 1,
                     borderRadius: 30,
@@ -188,10 +204,24 @@ export default function Home({ navigation }) {
                   key={item.id}
                   style={{ width: 35, height: 35, marginRight: 20 }}
                   onPress={() => {
-                    handleClick(item);
+                    var link = url + "/" + item.id;
+                    fetch(link, {
+                      method: "PUT",
+                      body: JSON.stringify({
+                        isLiked: !item.isLiked,
+                        like: item.isLiked==true ? item.like-1:item.like+1
+                      }),
+                      headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                      },
+                    })
+                      .then((res) => res.json())
+                      .then(() => {
+                        fc();
+                      });
                   }}
                 >
-                  {like ? (
+                  {item.isLiked ? (
                     <Image
                       source={require("../assets/redheart.png")}
                       style={{ width: 32, height: 32, resizeMode: "contain" }}
@@ -199,7 +229,7 @@ export default function Home({ navigation }) {
                   ) : (
                     <Image
                       source={require("../assets/heart.png")}
-                      style={{ width: 30, height: 30, resizeMode: "contain" }}
+                      style={{ width: 32, height: 32, resizeMode: "contain" }}
                     ></Image>
                   )}
                 </TouchableOpacity>
@@ -297,5 +327,7 @@ const styles = StyleSheet.create({
     width: "auto",
     height: 10,
   },
-  storyContainer: {},
+  storyContainer: {
+    marginTop: 6,
+  },
 });

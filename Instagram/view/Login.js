@@ -10,11 +10,7 @@ import {
 import { useState } from "react";
 import { Button } from "react-native-paper";
 
-// Logo View
-// Input View
-// Button View
-// Facebook View
-// Signup View
+
 
 export default function Login({ navigation }) {
   const [passVisiable, setPassVisiable] = useState(true);
