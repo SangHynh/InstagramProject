@@ -162,6 +162,7 @@ export default function SignUp({ navigation }) {
           <Text style={{ color: "#0398FC" }}> Cookies Policy</Text>
         </Text>
         <Button
+        // đăng kí
           buttonColor="#57CBFC"
           mode="contained"
           style={{ margin: 5, marginHorizontal: 13, borderRadius: 10 }}
@@ -169,10 +170,10 @@ export default function SignUp({ navigation }) {
             fetch(url, {
               method: "POST",
               body: JSON.stringify({
-                userName: userName,
-                mail: email,
-                fullName: fullName,
-                password: password,
+                userName: userName!=''?userName: alert('chưa nhập user name'),
+                mail: email!=''?email:alert('chưa nhập email'),
+                fullName: fullName!=''?fullName:alert('chưa nhập full name'),
+                password: password!=''?password:alert('chưa nhập password'),
                 numPost: 0,
                 numFollower: 0,
                 numFollowing: 0,
