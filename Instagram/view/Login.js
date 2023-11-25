@@ -7,13 +7,40 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 
+const url = "https://65612eb8dcd355c08323aca9.mockapi.io/users";
 
-
-export default function Login({ navigation }) {
+export default function Login({ navigation, route }) {
   const [passVisiable, setPassVisiable] = useState(true);
+  const [data, setData] = useState([]);
+  const fc = () => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => {
+        setData(json);
+        console.log(json);
+      });
+  };
+  var [mail, setMail] = useState("");
+  var [pass, setPass] = useState("");
+
+  const handleLogin = () => {
+    const user = data.find(
+      (user) => user.mail == mail && user.password == pass
+    );
+    console.log(user);
+    if (user) {
+      console.log(user);
+      alert("Login thành công!");
+      navigation.navigate("Home",{userLogin: user});
+    } else {
+      alert("Tên đăng nhập hoặc mật khẩu không chính xác!");
+    }
+  };
+
+  useEffect(fc, []);
   return (
     <View style={styles.container}>
       <View style={{ flex: 0.5 }}> </View>
@@ -29,6 +56,9 @@ export default function Login({ navigation }) {
             placeholder="Phone number, user name or email"
             placeholderTextColor={"gray"}
             style={styles.textInput}
+            onChangeText={(input) => {
+              setMail(input);
+            }}
           />
         </View>
         <View style={styles.inputView}>
@@ -37,6 +67,9 @@ export default function Login({ navigation }) {
             placeholderTextColor={"gray"}
             style={styles.textInput}
             secureTextEntry={passVisiable}
+            onChangeText={(input) => {
+              setPass(input);
+            }}
           />
           <TouchableOpacity
             onPress={() => {
@@ -71,7 +104,7 @@ export default function Login({ navigation }) {
           mode="contained"
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Home");
+            handleLogin();
           }}
         >
           <Text style={{ fontSize: 15 }}>Login</Text>
@@ -123,18 +156,24 @@ export default function Login({ navigation }) {
         ></View>
       </View>
       <View
-          style={{
-            borderBottomColor: "gray",
-            borderBottomWidth: StyleSheet.hairlineWidth,
-            flexDirection: "row",
-            flex: 0.3,
-          }}
-        ></View>
+        style={{
+          borderBottomColor: "gray",
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          flexDirection: "row",
+          flex: 0.3,
+        }}
+      ></View>
       <View style={styles.signUpView}>
-        
-        <Text style={{ margin: 10 , fontSize:15, color: "#878787"}}>Don’t have an account?</Text>
+        <Text style={{ margin: 10, fontSize: 15, color: "#878787" }}>
+          Don’t have an account?
+        </Text>
         <TouchableOpacity
-          style={{ color: "#1886D8", fontWeight: "500",marginTop:3,fontSize:15 }}
+          style={{
+            color: "#1886D8",
+            fontWeight: "500",
+            marginTop: 3,
+            fontSize: 15,
+          }}
           onPress={() => {
             navigation.navigate("SignUp");
           }}

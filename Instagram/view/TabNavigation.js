@@ -8,7 +8,9 @@ import Profile from "./Profile";
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigation({ navigation }) {
+export default function TabNavigation({ navigation, route }) {
+  const { userLogin } = route.params;
+
   return (
     <Tab.Navigator
       initialRouteName="Home"

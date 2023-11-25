@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 
 const url = "https://654afb8a5b38a59f28ee67ec.mockapi.io/post";
 
-export default function Home({ navigation }) {
+export default function Home({ navigation, route }) {
   const [postData, setPostData] = useState([]);
   const fc = () => {
     fetch(url)

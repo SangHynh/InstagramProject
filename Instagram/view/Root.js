@@ -14,7 +14,7 @@ export default function Root() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Login"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Splash" component={SplashScreen}></Stack.Screen>
