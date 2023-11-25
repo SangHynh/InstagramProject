@@ -28,7 +28,7 @@ export default function Login({ navigation, route }) {
 
   const handleLogin = () => {
     const user = data.find(
-      (user) => user.mail == mail && user.password == pass
+      (user) => (user.mail == mail || user.userName == user.userName)  && user.password == pass
     );
     console.log(user);
     if (user) {

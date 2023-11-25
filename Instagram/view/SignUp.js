@@ -6,11 +6,28 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 
 export default function SignUp({ navigation }) {
   const [passVisible, setPassVisible] = useState(true);
+  const url = "https://65612eb8dcd355c08323aca9.mockapi.io/users";
+  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [data, setData] = useState([]);
+  const fc = () => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => {
+        setData(json);
+        console.log(json);
+      });
+  };
+  useEffect(fc, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.logoView}>
@@ -67,14 +84,32 @@ export default function SignUp({ navigation }) {
         <TextInput
           style={styles.textInput}
           placeholder="Phone number or Email"
+          onChangeText={(input) => {
+            setEmail(input);
+          }}
         ></TextInput>
-        <TextInput style={styles.textInput} placeholder="Full Name"></TextInput>
-        <TextInput style={styles.textInput} placeholder="User Name"></TextInput>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Full Name"
+          onChangeText={(input) => {
+            setFullName(input);
+          }}
+        ></TextInput>
+        <TextInput
+          style={styles.textInput}
+          placeholder="User Name"
+          onChangeText={(input) => {
+            setUserName(input);
+          }}
+        ></TextInput>
         <View>
           <TextInput
             style={styles.textInput}
             placeholder="Password"
             secureTextEntry={passVisible}
+            onChangeText={(input) => {
+              setPassword(input);
+            }}
           ></TextInput>
           <TouchableOpacity
             style={{
@@ -130,7 +165,28 @@ export default function SignUp({ navigation }) {
           buttonColor="#57CBFC"
           mode="contained"
           style={{ margin: 5, marginHorizontal: 13, borderRadius: 10 }}
-          onPress={() => console.log(1)}
+          onPress={() => {
+            fetch(url, {
+              method: "POST",
+              body: JSON.stringify({
+                userName: userName,
+                mail: email,
+                fullName: fullName,
+                password: password,
+                numPost: 0,
+                numFollower: 0,
+                numFollowing: 0,
+                bio: "Cựu thiếu nhi",
+              }),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            })
+              .then((res) => res.json())
+              .then(() => {
+                fc();
+              });
+          }}
         >
           <Text style={{ fontSize: 15 }}>Sign up</Text>
         </Button>
@@ -158,7 +214,7 @@ export default function SignUp({ navigation }) {
           >
             Have an account?
             <TouchableOpacity
-              style={{ color: "#0398FC", marginTop:5 }}
+              style={{ color: "#0398FC", marginTop: 5 }}
               onPress={() => {
                 navigation.navigate("Login");
               }}
@@ -174,8 +230,7 @@ export default function SignUp({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   logoView: {
     flex: 1,
   },
@@ -188,7 +243,7 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     flex: 0.3,
-    bottom:0
+    bottom: 0,
   },
   textInput: {
     width: "auto",
